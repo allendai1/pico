@@ -6,7 +6,8 @@ dhtPIN = 0
 dhtSensor = DHT11(Pin(dhtPIN, Pin.OUT, Pin.PULL_DOWN))
 
 while True:
-    print("Temperature: " + str(dhtSensor.temperature))
+    tempF = (dhtSensor.temperature * (9 / 5)) + 32 
+    print("Temperature: " + str(tempF))
     print("Humidity: " + str(dhtSensor.humidity))
 
     time.sleep(1.5)
