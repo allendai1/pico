@@ -33,7 +33,9 @@ def main():
         
         # emit the data
         time.sleep(2)
-        data = atClient.put_public('test', str(num), namespace=namespace) # update:public:led@soccer0 0
+        data = atClient.put_public('test', str(num), namespace="group5") # update:public:led@soccer0 0
+        # data = atClient.put_public('test', str(num)) # update:public:led@soccer0 0
+
         time.sleep(2)
 
         print('response: data:%s' %data)
