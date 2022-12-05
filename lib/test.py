@@ -1,6 +1,9 @@
 
 def main():
     import sys
+    from machine import Pin
+    import utime as time
+    from lib.dht import DHT11
     shouldRun = str(input('Run? (y/n): ')).lower()
     if shouldRun != 'y':
         sys.exit(1)
@@ -27,14 +30,16 @@ def main():
     value = 0
     import random
     namespace = "group5"
+    dhtPIN = 0
+    dhtSensor = DHT11(Pin(dhtPIN, Pin.OUT, Pin.PULL_DOWN))
     for i in range(100):
-        time.sleep(3)
-        num = random.randint(1,10)
-        
-        # emit the data
         time.sleep(2)
-        data = atClient.put_public('test', str(num), namespace=namespace) # update:public:led@soccer0 0
-        # data = atClient.put_public('test', str(num)) # update:public:led@soccer0 0
+        num = random.randint(1,10)
+        tempF = (dhtSensor.temperature * (9 / 5)) + 32 
+        humidity = dhtSensor.humidity
+
+        # emit the data
+        data = atClient.put_public("temperature", str(tempF), namespace=namespace) # update:public:led@soccer0 0
 
         time.sleep(2)
 
