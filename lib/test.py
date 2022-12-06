@@ -32,17 +32,16 @@ def main():
     namespace = "group5"
     dhtPIN = 0
     dhtSensor = DHT11(Pin(dhtPIN, Pin.OUT, Pin.PULL_DOWN))
-    for i in range(100):
-        time.sleep(2)
+    for i in range(200):
         num = random.randint(1,10)
+        test_humidity = random.randint(1,10);
         tempF = (dhtSensor.temperature * (9 / 5)) + 32 
         humidity = dhtSensor.humidity
-
         # emit the data
-        data = atClient.put_public("temperature", str(tempF), namespace=namespace) # update:public:led@soccer0 0
+        data = atClient.put_public("temperature", str(tempF)+","+str(humidity), namespace=namespace) # update:public:led@soccer0 0
+        # data = atClient.put_public("temperature", str(num)+","+str(test_humidity), namespace=namespace) # update:public:led@soccer0 0
 
         time.sleep(2)
-
         print('response: data:%s' %data)
         
 if __name__ == '__main__':
